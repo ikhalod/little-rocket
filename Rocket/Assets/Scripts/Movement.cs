@@ -40,13 +40,13 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            ApplyRotation(direction);
+            ApplyRotation(-direction);
             Debug.Log("Rotating to the left!");
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            ApplyRotation(-direction);
+            ApplyRotation(direction);
             Debug.Log("Rotating to the Right!");
         }
     }
