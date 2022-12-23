@@ -18,17 +18,22 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        ProcessBoost();
         ProcessRotation();
     }
 
-    private void ProcessInput()
+    private void ProcessBoost()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
+            StartBoosting();
             Debug.Log("Boost Activated");
         }
+    }
+
+    private void StartBoosting()
+    {
+        rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
     }
 
     private void ProcessRotation()
