@@ -8,11 +8,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 100f;
     [SerializeField] float direction = 5f;
     Rigidbody rb;
+    AudioSource Sound;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
