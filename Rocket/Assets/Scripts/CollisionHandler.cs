@@ -4,23 +4,32 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float NextLevelDelay = 1f;
+
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
             case "Respawn":
-                Debug.Log("Hello there!");
+                Debug.Log("Hey you are alive!");
                 break;
             case "Finish":
-                NextLevel();
+                GetComponent<Movement>().enabled = false;
+                Invoke("NextLevel", NextLevelDelay);
                 break;
             default:
-                ReloadLevel();
+                StartCrashEvent();
                 break;
         }
     }
 
-     void NextLevel()
+    void StartCrashEvent()
+    {
+        GetComponent<Movement>().enabled= false;
+        Invoke("ReloadLevel", NextLevelDelay);
+    }
+
+    void NextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int NextLevelSceneIndex = currentSceneIndex + 1;
