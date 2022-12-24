@@ -8,13 +8,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 500f;
     [SerializeField] float direction = 180f;
     Rigidbody rb;
-    AudioSource Sound;
+    AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Sound = GetComponent<AudioSource>();
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,16 +28,17 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            Debug.Log("Boosting");
             rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
-            if (!Sound.isPlaying)
+            if (!sound.isPlaying)
             {
-                Sound.Play();
+                sound.Play();
             }
         }
 
         else
         {
-            Sound.Stop();
+            sound.Stop();
         }
     }
 
