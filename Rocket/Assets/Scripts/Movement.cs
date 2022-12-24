@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float speed = 100f;
-    [SerializeField] float direction = 5f;
+    [SerializeField] float speed = 500f;
+    [SerializeField] float direction = 180f;
     Rigidbody rb;
     AudioSource Sound;
 
@@ -28,14 +28,17 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            StartBoosting();
-            Debug.Log("Boost Activated");
+            rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
+            if (!Sound.isPlaying)
+            {
+                Sound.Play();
+            }
         }
-    }
 
-    private void StartBoosting()
-    {
-        rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
+        else
+        {
+            Sound.Stop();
+        }
     }
 
     private void ProcessRotation()
@@ -43,13 +46,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             ApplyRotation(-direction);
-            Debug.Log("Rotating to the left!");
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             ApplyRotation(direction);
-            Debug.Log("Rotating to the Right!");
         }
     }
 
