@@ -4,18 +4,53 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    [SerializeField] float NextLevelDelay = 1f;
+    [SerializeField] float nextLevelDelay;
+
+    [SerializeField] AudioClip crash;
+    [SerializeField] AudioClip win;
+
+    [SerializeField] ParticleSystem winEffect;
+    [SerializeField] ParticleSystem crushEffect;
+
+    AudioSource sound;
+
+    bool isTransitioning = false;
+    bool collisionDisabled = false;
+
+    void Start()
+    {
+        sound = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.S)) 
+        {
+            ProcessLoadLevel();
+        }
+
+        else if (Input.GetKeyUp(KeyCode.D)) 
+        {
+            collisionDisabled = !collisionDisabled; // toggle collision!
+        }
+    }
+
+    void RespondToDebugKeys()
+    {
+        NextLevelEvent();
+    }
 
     void OnCollisionEnter(Collision other)
     {
+        if (isTransitioning || collisionDisabled) { return; }
+
         switch (other.gameObject.tag)
         {
             case "Respawn":
                 Debug.Log("Hey you are alive!");
                 break;
             case "Finish":
-                GetComponent<Movement>().enabled = false;
-                Invoke("NextLevel", NextLevelDelay);
+                NextLevelEvent();
                 break;
             default:
                 StartCrashEvent();
@@ -23,13 +58,27 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
-    void StartCrashEvent()
+    void NextLevelEvent()
     {
-        GetComponent<Movement>().enabled= false;
-        Invoke("ReloadLevel", NextLevelDelay);
+        isTransitioning = true;
+        sound.Stop();
+        sound.PlayOneShot(win);
+        winEffect.Play();
+        GetComponent<Movement>().enabled = false;
+        Invoke("ProcessLoadLevel", nextLevelDelay);
     }
 
-    void NextLevel()
+    void StartCrashEvent()
+    {
+        isTransitioning = true;
+        sound.Stop();
+        sound.PlayOneShot(crash);
+        crushEffect.Play();
+        GetComponent<Movement>().enabled = false;
+        Invoke("ProcessReloadLevel", nextLevelDelay);
+    }
+
+    void ProcessLoadLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int NextLevelSceneIndex = currentSceneIndex + 1;
@@ -40,7 +89,7 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(NextLevelSceneIndex);
     }
 
-    void ReloadLevel()
+    void ProcessReloadLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);

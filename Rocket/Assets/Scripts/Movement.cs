@@ -7,6 +7,9 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float speed = 500f;
     [SerializeField] float direction = 180f;
+    [SerializeField] AudioClip boost;
+    [SerializeField] ParticleSystem boostEffect;
+
     Rigidbody rb;
     AudioSource sound;
 
@@ -28,16 +31,20 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("Boosting");
             rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
             if (!sound.isPlaying)
             {
-                sound.Play();
+                sound.PlayOneShot(boost);
+            }
+            if (!boostEffect.isPlaying)
+            {
+                boostEffect.Play();
             }
         }
 
         else
         {
+            boostEffect.Stop();
             sound.Stop();
         }
     }
