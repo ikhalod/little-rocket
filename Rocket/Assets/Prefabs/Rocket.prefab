@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41406acc28b8874db93e82e2c1aa26b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  speed: 300
   direction: 180
   boost: {fileID: 8300000, guid: c55838e52cbf236429e7f546c366fa31, type: 3}
   boostEffect: {fileID: 1333702750096072344}
