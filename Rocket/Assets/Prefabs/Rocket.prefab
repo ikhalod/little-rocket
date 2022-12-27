@@ -358,8 +358,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132319199572281842}
   m_LocalRotation: {x: 0.34766304, y: 0.61573565, z: 0.61573565, w: -0.34766307}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: -0, y: 0.045, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 73.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 811222215694539037}
@@ -668,8 +668,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.0199828, y: 6.6310887, z: 3.262777}
-  m_Center: {x: 0, y: 0.7952514, z: -0.10444693}
+  m_Size: {x: 3.0199828, y: 5.9847736, z: 3.262777}
+  m_Center: {x: 0, y: 1.1184108, z: -0.10444686}
 --- !u!82 &1187478114
 AudioSource:
   m_ObjectHideFlags: 0
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelDelay: 2
-  crash: {fileID: 8300000, guid: abbab33da31623a428df27538b23b324, type: 3}
+  crash: {fileID: 8300000, guid: 055bf6b1d31c2514c82d9b5803c5d414, type: 3}
   win: {fileID: 8300000, guid: 2489c488a6b5c1b479ab1e5a7e9897a7, type: 3}
   winEffect: {fileID: 4262912427061867824}
   crushEffect: {fileID: 1391214536418306192}
