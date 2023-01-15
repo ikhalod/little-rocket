@@ -24,12 +24,12 @@ public class CollisionHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S)) 
+        if (Input.GetKeyUp(KeyCode.X)) 
         {
             ProcessLoadLevel();
         }
 
-        else if (Input.GetKeyUp(KeyCode.D)) 
+        else if (Input.GetKeyUp(KeyCode.C)) 
         {
             collisionDisabled = !collisionDisabled; // toggle collision!
         }

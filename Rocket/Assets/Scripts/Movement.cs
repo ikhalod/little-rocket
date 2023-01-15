@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
 
     private void ProcessBoost()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             rb.AddRelativeForce(Vector3.up * Time.deltaTime * speed);
             if (!sound.isPlaying)
@@ -47,16 +47,21 @@ public class Movement : MonoBehaviour
             boostEffect.Stop();
             sound.Stop();
         }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.AddRelativeForce(Vector3.down* Time.deltaTime * speed);
+        }
     }
 
     private void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             ApplyRotation(-direction);
         }
 
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
             ApplyRotation(direction);
         }
